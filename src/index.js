@@ -13,6 +13,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/admin', require('./routes/adminRoute'));
+app.use('/post', require('./routes/postRoute'));
+app.use('/user', require('./routes/userRoute'));
+app.use('/message', require('./routes/messageRoute'));
+
 app.listen(port, () => {
   console.log(`Server started on port: ${port}`);
 });
