@@ -8,6 +8,7 @@ const postSchema = mongoose.Schema(
       ref: 'Admin',
       required: true,
     },
+    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
     date: { type: Date, required: true },
     text: { type: String, required: true },
     published: { type: Boolean, required: true },
