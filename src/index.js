@@ -11,7 +11,7 @@ connectDB();
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.use('/admin', require('./routes/adminRoute'));
 app.use('/post', require('./routes/postRoute'));
