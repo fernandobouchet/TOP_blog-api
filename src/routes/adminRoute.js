@@ -5,8 +5,9 @@ const {
   loginAdmin,
 } = require('../controllers/adminController');
 const router = express.Router();
+const { protect } = require('../middleware/authMiddleware');
 
-router.get('/me', getAdmin);
+router.get('/me', protect, getAdmin);
 
 router.post('/', registerAdmin);
 

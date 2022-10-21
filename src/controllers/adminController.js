@@ -6,7 +6,15 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
-const getAdmin = (req, res) => {};
+const getAdmin = async (req, res) => {
+  const { _id, name, lastname, email } = await Admin.findById(req.user.id);
+  res.status(200).json({
+    id: _id,
+    name,
+    lastname,
+    email,
+  });
+};
 
 const registerAdmin = async (req, res) => {
   const { name, lastname, email, password } = req.body;
