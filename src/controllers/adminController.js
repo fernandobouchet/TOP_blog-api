@@ -2,6 +2,10 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const Admin = require('../models/adminModel');
 
+const generateToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
+};
+
 const getAdmin = (req, res) => {};
 
 const registerAdmin = async (req, res) => {
@@ -34,6 +38,7 @@ const registerAdmin = async (req, res) => {
       name: admin.name,
       lastname: admin.lastname,
       email: admin.email,
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -52,6 +57,7 @@ const loginAdmin = async (req, res) => {
       name: admin.name,
       lastname: admin.lastname,
       email: admin.email,
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
