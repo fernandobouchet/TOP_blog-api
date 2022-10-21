@@ -12,7 +12,7 @@ router.get('/', getPost);
 
 router.post('/', protect, setPost);
 
-router.put('/:id', protect, updatePost);
+router.put('/:id', updatePost);
 
 router.delete('/:id', protect, deletePost);
 
