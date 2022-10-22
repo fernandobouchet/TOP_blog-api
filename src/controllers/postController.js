@@ -1,4 +1,5 @@
 const Post = require('../models/postModel');
+const Message = require('../models/messageModel');
 
 const getAllPost = async (req, res) => {
   const posts = await Post.find();
@@ -7,7 +8,8 @@ const getAllPost = async (req, res) => {
 
 const getPost = async (req, res) => {
   const post = await Post.findById(req.params.id);
-  res.status(200).json(post);
+  const messages = await Message.find({ postId: req.params.id });
+  res.status(200).json({ post, messages });
 };
 
 const setPost = async (req, res) => {
