@@ -12,7 +12,7 @@ const getPost = async (req, res) => {
   if (messages) {
     post.messages = messages;
   }
-  res.status(200).json({ post });
+  res.status(200).json(post);
 };
 
 const setPost = async (req, res) => {
