@@ -9,7 +9,10 @@ const getAllPost = async (req, res) => {
 const getPost = async (req, res) => {
   const post = await Post.findById(req.params.id);
   const messages = await Message.find({ postId: req.params.id });
-  res.status(200).json({ post, messages });
+  if (messages) {
+    post.messages = messages;
+  }
+  res.status(200).json({ post });
 };
 
 const setPost = async (req, res) => {

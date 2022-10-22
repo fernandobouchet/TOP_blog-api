@@ -7,11 +7,10 @@ const postSchema = mongoose.Schema(
     author: { type: String, required: true },
     date: { type: Date, required: true },
     text: { type: String, required: true },
+    messages: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Message' }],
     published: { type: Boolean, required: true },
   },
-  {
-    timestamps: true,
-  }
+  { toJSON: { virtuals: true }, timestamps: true }
 );
 
 postSchema.virtual('date_formatted').get(function () {

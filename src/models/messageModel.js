@@ -9,9 +9,7 @@ const messageModel = mongoose.Schema(
     email: { type: String, required: true },
     text: { type: String, required: true },
   },
-  {
-    timestamps: true,
-  }
+  { toJSON: { virtuals: true }, timestamps: true }
 );
 
 messageModel.virtual('date_formatted').get(function () {
