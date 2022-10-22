@@ -46,7 +46,7 @@ const registerAdmin = async (req, res) => {
       name: admin.name,
       lastname: admin.lastname,
       email: admin.email,
-      token: generateToken(user._id),
+      token: generateToken(admin._id),
     });
   } else {
     res.status(400);
@@ -65,7 +65,7 @@ const loginAdmin = async (req, res) => {
       name: admin.name,
       lastname: admin.lastname,
       email: admin.email,
-      token: generateToken(user._id),
+      token: generateToken(admin._id),
     });
   } else {
     res.status(400);
