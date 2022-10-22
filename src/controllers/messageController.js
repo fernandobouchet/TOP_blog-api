@@ -6,15 +6,15 @@ const getMessage = async (req, res) => {
 };
 
 const setMessage = async (req, res) => {
-  if (!req.body.text || !req.body.username || !req.body.email) {
+  if (!req.body.text || !req.body.username || !req.body.postId) {
     res.status(400);
     throw new Error('Field of message missing');
   }
 
   const message = await Message.create({
     date: new Date(),
+    postId: req.body.postId,
     username: req.body.username,
-    email: req.body.email,
     text: req.body.text,
   });
 
