@@ -1,8 +1,13 @@
 const Post = require('../models/postModel');
 
-const getPost = async (req, res) => {
+const getAllPost = async (req, res) => {
   const posts = await Post.find();
   res.status(200).json(posts);
+};
+
+const getPost = async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  res.status(200).json(post);
 };
 
 const setPost = async (req, res) => {
@@ -48,4 +53,10 @@ const deletePost = async (req, res) => {
   res.status(200).json({ id: req.params.id });
 };
 
-module.exports = { getPost, setPost, updatePost, deletePost };
+module.exports = {
+  getAllPost,
+  getPost,
+  setPost,
+  updatePost,
+  deletePost,
+};
