@@ -24,7 +24,7 @@ const setPost = async (req, res) => {
   const post = await Post.create({
     title: req.body.title,
     author: req.body.author,
-    date: req.body.date,
+    date: new Date(),
     text: req.body.text,
     published: req.body.published,
   });
