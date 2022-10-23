@@ -1,15 +1,18 @@
 const express = require('express');
 const {
-  getAllPost,
+  getAllPosts,
   getPost,
   setPost,
   updatePost,
   deletePost,
+  getPublishedPosts,
 } = require('../controllers/postController');
 const router = express.Router();
 const { protect } = require('../middleware/authMiddleware');
 
-router.get('/', getAllPost);
+router.get('/', getPublishedPosts);
+
+router.get('/all', getAllPosts);
 
 router.get('/:id', getPost);
 

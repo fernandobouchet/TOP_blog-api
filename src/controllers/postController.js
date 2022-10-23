@@ -1,7 +1,12 @@
 const Post = require('../models/postModel');
 const Message = require('../models/messageModel');
 
-const getAllPost = async (req, res) => {
+const getPublishedPosts = async (req, res) => {
+  const posts = await Post.find({ published: true });
+  res.status(200).json(posts);
+};
+
+const getAllPosts = async (req, res) => {
   const posts = await Post.find();
   res.status(200).json(posts);
 };
@@ -59,9 +64,10 @@ const deletePost = async (req, res) => {
 };
 
 module.exports = {
-  getAllPost,
+  getAllPosts,
   getPost,
   setPost,
   updatePost,
   deletePost,
+  getPublishedPosts,
 };
