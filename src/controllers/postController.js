@@ -2,12 +2,12 @@ const Post = require('../models/postModel');
 const Message = require('../models/messageModel');
 
 const getPublishedPosts = async (req, res) => {
-  const posts = await Post.find({ published: true });
+  const posts = await Post.find({ published: true }).sort({ date: -1 });
   res.status(200).json(posts);
 };
 
 const getAllPosts = async (req, res) => {
-  const posts = await Post.find();
+  const posts = await Post.find().sort({ date: -1 });
   res.status(200).json(posts);
 };
 
