@@ -7,6 +7,10 @@ const {
   deletePost,
   getPublishedPosts,
 } = require('../controllers/postController');
+const upload = require('../services/imageUploader');
+
+const singleUpload = upload.single('image');
+
 const router = express.Router();
 const { protect } = require('../middleware/authMiddleware');
 
@@ -16,7 +20,7 @@ router.get('/all', getAllPosts);
 
 router.get('/:id', getPost);
 
-router.post('/', protect, setPost);
+router.post('/', protect, singleUpload, setPost);
 
 router.put('/:id', protect, updatePost);
 

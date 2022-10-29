@@ -1,5 +1,7 @@
 const Post = require('../models/postModel');
 const Message = require('../models/messageModel');
+const fs = require('fs');
+const path = require('path');
 
 const getPublishedPosts = async (req, res) => {
   const posts = await Post.find({ published: true }).sort({ date: -1 });
@@ -25,11 +27,19 @@ const setPost = async (req, res) => {
     res.status(400);
     throw new Error('Please add a text field');
   }
+  if (!req.file) {
+    res.status(400);
+    throw new Error('Please add a file');
+  }
 
   const post = await Post.create({
     title: req.body.title,
     author: req.body.author,
     date: new Date(),
+    image: {
+      data: fs.readFileSync(path.join('temp/uploads/' + req.file.filename)),
+      contentType: req.file.mimetype,
+    },
     text: req.body.text,
     published: req.body.published,
   });
