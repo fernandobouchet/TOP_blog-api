@@ -4,6 +4,7 @@ const cors = require('cors');
 const compression = require('compression');
 const helmet = require('helmet');
 const connectDB = require('./database/db');
+global.__basedir = __dirname;
 
 const port = process.env.PORT || 3000;
 

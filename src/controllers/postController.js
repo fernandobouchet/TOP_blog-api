@@ -37,7 +37,9 @@ const setPost = async (req, res) => {
     author: req.body.author,
     date: new Date(),
     image: {
-      data: fs.readFileSync(path.join('temp/uploads/' + req.file.filename)),
+      data: fs.readFileSync(
+        path.join(__basedir + '/temp/uploads/' + req.file.filename)
+      ),
       contentType: req.file.mimetype,
     },
     text: req.body.text,
@@ -61,7 +63,7 @@ const updatePost = async (req, res) => {
       author: req.body.author,
       date: new Date(),
       image: {
-        data: fs.readFileSync(path.join('temp/uploads/' + req.file.filename)),
+        data: fs.readFileSync(path.join(__dirname + req.file.filename)),
         contentType: req.file.mimetype,
       },
       text: req.body.text,
