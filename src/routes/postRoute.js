@@ -22,7 +22,7 @@ router.get('/:id', getPost);
 
 router.post('/', protect, singleUpload, setPost);
 
-router.put('/:id', protect, updatePost);
+router.put('/:id', protect, singleUpload, updatePost);
 
 router.delete('/:id', protect, deletePost);
 

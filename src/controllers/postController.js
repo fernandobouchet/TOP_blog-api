@@ -54,9 +54,23 @@ const updatePost = async (req, res) => {
     throw new Error('Post not found');
   }
 
-  const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
+  const updatedPost = await Post.findByIdAndUpdate(
+    req.params.id,
+    {
+      title: req.body.title,
+      author: req.body.author,
+      date: new Date(),
+      image: {
+        data: fs.readFileSync(path.join('temp/uploads/' + req.file.filename)),
+        contentType: req.file.mimetype,
+      },
+      text: req.body.text,
+      published: req.body.published,
+    },
+    {
+      new: true,
+    }
+  );
   res.status(200).json(updatedPost);
 };
 
