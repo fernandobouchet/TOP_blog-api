@@ -1,4 +1,5 @@
 const express = require('express');
+const { setMessageValidator } = require('../../validators/messageValidator');
 const {
   getMessage,
   setMessage,
@@ -11,7 +12,7 @@ const router = express.Router();
 
 router.get('/', getMessage);
 
-router.post('/', setMessage);
+router.post('/', setMessageValidator, setMessage);
 
 router.put('/:id', protect, updateMessage);
 
