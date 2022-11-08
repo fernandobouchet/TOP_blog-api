@@ -1,7 +1,7 @@
-const Post = require('../models/postModel');
-const Message = require('../models/messageModel');
-const fs = require('fs');
-const path = require('path');
+const Post = require("../models/postModel");
+const Message = require("../models/messageModel");
+const fs = require("fs");
+const path = require("path");
 
 const getPublishedPosts = async (req, res) => {
   const posts = await Post.find({ published: true }).sort({ date: -1 });
@@ -25,20 +25,20 @@ const getPost = async (req, res) => {
 const setPost = async (req, res) => {
   if (!req.body.text) {
     res.status(400);
-    throw new Error('Please add a text field');
+    throw new Error("Please add a text field");
   }
   if (!req.file) {
     res.status(400);
-    throw new Error('Please add a file');
+    throw new Error("Please add a file");
   }
 
   const post = await Post.create({
     title: req.body.title,
-    author: req.body.author,
+    author: `${req.user.name} ${req.user.lastname}`,
     date: new Date(),
     image: {
       data: fs.readFileSync(
-        path.join(__basedir + '/temp/uploads/' + req.file.filename)
+        path.join(__basedir + "/temp/uploads/" + req.file.filename)
       ),
       contentType: req.file.mimetype,
     },
@@ -53,13 +53,11 @@ const updatePost = async (req, res) => {
 
   if (!post) {
     res.status(400);
-    throw new Error('Post not found');
+    throw new Error("Post not found");
   }
 
   const updatedData = {
     title: req.body.title,
-    author: req.body.author,
-    date: new Date(),
     text: req.body.text,
     published: req.body.published,
   };
@@ -67,7 +65,7 @@ const updatePost = async (req, res) => {
   if (req.file) {
     updatedData.image = {
       data: fs.readFileSync(
-        path.join(__basedir + '/temp/uploads/' + req.file.filename)
+        path.join(__basedir + "/temp/uploads/" + req.file.filename)
       ),
       contentType: req.file.mimetype,
     };
@@ -90,7 +88,7 @@ const deletePost = async (req, res) => {
 
   if (!post) {
     res.status(400);
-    throw new Error('Post not found');
+    throw new Error("Post not found");
   }
 
   await post.remove();
