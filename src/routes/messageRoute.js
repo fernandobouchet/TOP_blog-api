@@ -1,5 +1,5 @@
 const express = require('express');
-const { setMessageValidator } = require('../../validators/messageValidator');
+const { setMessageValidator } = require('../validators/messageValidator');
 const {
   getMessage,
   setMessage,
